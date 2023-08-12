@@ -1,8 +1,8 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 
 # Create your views here.
 # Defining a Greeting Method to send and receive a HTTP Request
 
 
-def greeting(request):
-    return HttpResponse("Hello")
+def get_todo_items(request):
+    return render(request, "crud/crud_app.html")
