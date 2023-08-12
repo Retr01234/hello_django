@@ -5,4 +5,4 @@ from django.shortcuts import render
 
 
 def get_todo_items(request):
-    return render(request, "crud/crud_app.html")
+    return render(request, 'crud/crud_app.html')
