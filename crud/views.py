@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Item
+from .forms import ItemForm
 
 # Create your views here.
 # Defining a Greeting Method to send and receive a HTTP Request
@@ -15,9 +16,13 @@ def get_todo_items(request):
 
 def add_item(request):
     if request.method == 'POST':
-        name = request.POST.get('item_name')
-        done = 'done' in request.POST
-        Item.objects.create(name=name, done=done)
+        form = ItemForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('get_todo_items')
 
-        return redirect('get_todo_items')
-    return render(request, 'crud/add_item.html')
+    form = ItemForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'crud/add_item.html', context)
